@@ -90,11 +90,11 @@ Has a reachable socket path for birdc
 
 🔔 Example Alert (Telegram)
 
-Problem: BGP session (pb_00<xx>_AS<xxxxxx>) is DOWN
-Host: Bird2 New
+Problem: BGP session (pb_0001_as65535) is DOWN
+Host: Bird1 New
 Severity: High
-Address: 2001:db8:85a3::8a2e:370:7334
-Protocol: IPv6
+Address: 192.168.0.0
+Protocol: IPv4
 
 📂 Repo Structure
 
@@ -107,6 +107,22 @@ Protocol: IPv6
 ├── zabbix_agentd.d/
 │   └── bgp.conf
 ├── README.md
+
+🧠 How It Works
+
+BIRD maintains a list of BGP sessions and their current state (via socket).
+
+bgp_peer_discovery.sh queries BIRD (IPv4 and IPv6 sockets), extracts session names, IPs, protocol version, and description.
+
+It builds a dynamic JSON using jq, returning a list of {#PEER}, {#ADDR}, {#PROTO}, {#DESC} entries.
+
+Zabbix uses Low-Level Discovery (LLD) to create one item and one trigger per peer.
+
+check_bgp_peer.sh checks each session’s status via birdc and returns 1 (up) or 0 (down).
+
+Triggers raise alerts for any peer session that goes down, tagging IPv4 or IPv6 accordingly.
+
+Alerts can be sent via Telegram, email, etc.
 
 🌐 Credit
 
@@ -124,4 +140,6 @@ Add Grafana dashboards
 
 Support for other routing daemons (FRR, GoBGP)
 
-📑 License
+📁 License
+
+MIT
