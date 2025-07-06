@@ -90,10 +90,10 @@ Has a reachable socket path for birdc
 
 🔔 Example Alert (Telegram)
 
-Problem: BGP session (pb_0072_as263232) is DOWN
+Problem: BGP session (pb_00<xx>_AS<xxxxxx>) is DOWN
 Host: Bird2 New
 Severity: High
-Address: 2801:1d:a000:1::1199
+Address: 2001:db8:85a3::8a2e:370:7334
 Protocol: IPv6
 
 📂 Repo Structure
