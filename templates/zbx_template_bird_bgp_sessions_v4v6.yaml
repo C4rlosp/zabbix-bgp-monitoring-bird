@@ -1,0 +1,44 @@
+zabbix_export:
+  version: '6.0'
+  date: '2025-07-06T06:07:40Z'
+  templates:
+  - uuid: 272933f9-2541-4263-8a9a-8e123e8c12ad
+    template: Template BIRD BGP Sessions v4v6
+    name: Template BIRD BGP Sessions v4v6
+    description: "Monitorea sesiones BGP IPv4 e IPv6 en BIRD v\xEDa Zabbix Agent +\
+      \ scripts personalizados."
+    groups:
+    - name: Network Devices CRIX-NIC
+    discovery_rules:
+    - uuid: 0d579a34-1f55-415c-badb-4b94d14771e7
+      name: BIRD BGP Peer Discovery
+      type: ZABBIX_ACTIVE
+      key: bgp.peer.discovery
+      delay: 5m
+      lifetime: 30d
+      item_prototypes:
+      - uuid: 21e60e9d-8bde-403c-838a-038e4b67e041
+        name: BGP Peer State [{#PEER}] - ({#PROTO}) {#ADDR}
+        key: check_bgp_peer_state[{#PEER}]
+        type: ZABBIX_PASSIVE
+        value_type: TEXT
+        delay: 1m
+        description: 1 = Established, 0 = Down
+        tags:
+        - tag: desc
+          value: '{#DESC}'
+        - tag: addr
+          value: '{#ADDR}'
+        - tag: proto
+          value: '{#PROTO}'
+      trigger_prototypes:
+      - uuid: 8924accb-a4b2-45cb-9a58-c8a49a80c9cf
+        expression: '{Template BIRD BGP Sessions v4v6:check_bgp_peer_state[{#PEER}].last()}=0
+          and {#PROTO}="IPv4"'
+        name: 'BGP Session DOWN - IPv4: {#PEER} - {#DESC}'
+        priority: HIGH
+      - uuid: 6ceb26be-5504-4dc8-b73e-c42e031780c5
+        expression: '{Template BIRD BGP Sessions v4v6:check_bgp_peer_state[{#PEER}].last()}=0
+          and {#PROTO}="IPv6"'
+        name: 'BGP Session DOWN - IPv6: {#PEER} - {#DESC}'
+        priority: HIGH
