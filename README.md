@@ -1,8 +1,9 @@
-BGP Monitoring with Zabbix + BIRD + LLD (IPv4 & IPv6)
+🇺🇸🇸🇻🇨🇷 BGP Monitoring with Zabbix + BIRD + LLD (IPv4 & IPv6)
+Official template for automated BGP session monitoring on BIRD route servers in an Internet Exchange Point (IXP) environment, using Zabbix Agent, custom scripts, and Low-Level Discovery (LLD).
+Plantilla oficial para el monitoreo automatizado de sesiones BGP en servidores BIRD dentro de un entorno de IXP, utilizando Zabbix Agent, scripts personalizados y descubrimiento de bajo nivel (LLD).
 
-Automated monitoring of BGP sessions on BIRD route servers in an Internet Exchange Point (IXP) environment using Zabbix Agent, custom scripts, and Low-Level Discovery (LLD).
-
-Developed and deployed by NIC Costa Rica (CRIX) to monitor dual-stack peers (IPv4/IPv6) across multiple BIRD router-servers.
+Desarrollada y desplegada por NIC Costa Rica (CRIX), con soporte a peers dual-stack (IPv4/IPv6) en múltiples route-servers BIRD.
+Developed and deployed by NIC Costa Rica (CRIX), supporting dual-stack (IPv4/IPv6) peer monitoring across multiple BIRD router-servers.
 
 📊 Features
 
